@@ -31,6 +31,10 @@ bool gpt_params_parse(int argc, char ** argv, gpt_params & params) {
             params.n_batch = std::stoi(argv[++i]);
         } else if (arg == "-m" || arg == "--model") {
             params.model = argv[++i];
+        } else if (arg == "-q" || arg == "--quiet") {
+            params.quiet = true;
+        } else if (arg == "-ns" || arg == "--nl_stop") {
+            params.newline_stop = false;
         } else if (arg == "-h" || arg == "--help") {
             gpt_print_usage(argc, argv, params);
             exit(0);
@@ -60,6 +64,7 @@ void gpt_print_usage(int argc, char ** argv, const gpt_params & params) {
     fprintf(stderr, "  --repeat_penalty N    penalize repeat sequence of tokens (default: %.1f)\n", params.repeat_penalty);
     fprintf(stderr, "  --temp N              temperature (default: %.1f)\n", params.temp);
     fprintf(stderr, "  -b N, --batch_size N  batch size for prompt processing (default: %d)\n", params.n_batch);
+    fprintf(stderr, "  -q, --quiet           only print model output and suppress debug/performance information (default: false)\n");
     fprintf(stderr, "  -m FNAME, --model FNAME\n");
     fprintf(stderr, "                        model path (default: %s)\n", params.model.c_str());
     fprintf(stderr, "\n");

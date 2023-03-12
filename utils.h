@@ -25,6 +25,8 @@ struct gpt_params {
     float   repeat_penalty  = 1.30f;
 
     int32_t n_batch = 8; // batch size for prompt processing
+    bool    quiet = false; // whether to print only model output
+    bool    newline_stop = false; // stop when newline is encountered
 
     std::string model = "models/lamma-7B/ggml-model.bin"; // model path
     std::string prompt;
